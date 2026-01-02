@@ -1,7 +1,17 @@
-import { Suspense } from 'react'
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Environment, ContactShadows } from '@react-three/drei'
-import { Model } from '../components/Model'
+import {
+    Model
+} from '../components/Model'
+import {
+    Canvas
+} from '@react-three/fiber'
+import {
+    OrbitControls,
+    Environment,
+    ContactShadows
+} from '@react-three/drei'
+import {
+    Suspense
+} from 'react'
 
 export default function Home() {
     return (
