@@ -1,10 +1,13 @@
-import React from 'react'
-import { useGLTF, useAnimations } from '@react-three/drei'
+import {
+  useGLTF,
+  useAnimations
+} from '@react-three/drei';
+import React from 'react';
 
 export function Model(props) {
-  const group = React.useRef()
-  const { nodes, materials, animations } = useGLTF('/for_Davlatjon/Saxna.glb')
-  const { actions } = useAnimations(animations, group)
+  const group = React.useRef();
+  const { nodes, materials, animations } = useGLTF('/for_Davlatjon/Saxna.glb');
+  const { actions } = useAnimations(animations, group);
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
@@ -22,4 +25,4 @@ export function Model(props) {
   )
 }
 
-useGLTF.preload('/for_Davlatjon/Saxna.glb')
+useGLTF.preload('/for_Davlatjon/Saxna.glb');
