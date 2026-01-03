@@ -87,8 +87,52 @@ loader.setDRACOLoader(dracoLoader);
 loader.load(
     '/models/Saxna.glb',
     (gltf) => {
-        scene.add(gltf.scene);
-        console.log('Model loaded successfully');
+        const model = gltf.scene;
+        console.log(model);
+
+        model.traverse((child) => {
+            if (child.isMesh) {
+                if (child.name.includes("eshik")) {
+                    console.log("door child: ", child);
+                    child.material = new THREE.MeshStandardMaterial({
+                        map: door_light_txt,
+                        roughnessMap: door_roughness_txt,
+                        normalMap: door_normal_txt,
+                        emissiveMap: door_light_txt,
+                        emissive: new THREE.Color(0xffffff),
+                        emissiveIntensity: 1.0
+                    });
+
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+
+                    child.geometry.attributes.uv2 = child.geometry.attributes.uv;
+                }
+
+
+                else {
+
+                    console.log("eshik child: ", child);
+                    child.material = new THREE.MeshStandardMaterial({
+                        map: floor_light_txt,
+                        roughnessMap: floor_roughness_txt,
+                        normalMap: floor_normal_txt,
+                        emissiveMap: floor_light_txt,
+                        emissive: new THREE.Color(0xffffff),
+                        emissiveIntensity: 1.0
+                    });
+
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+
+                    child.geometry.attributes.uv2 = child.geometry.attributes.uv;
+
+                }
+            }
+        });
+
+        scene.add(model);
+        console.log('Model with packed textures loaded!');
     },
     (xhr) => {
         console.log((xhr.loaded / xhr.total * 100) + '% loaded');
