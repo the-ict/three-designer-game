@@ -1,11 +1,13 @@
 import './style.css'
-import { setupCounter } from './counter.js'
+
+import {
+  setupCounter
+} from './counter.js'
 
 document.querySelector('#app').innerHTML = `
-  <div>
+  <div id="counter" >
     <h1> Hello mother fucker !. </h1>
   </div>
-`
-
+`;
 
 setupCounter(document.querySelector('#counter'))
