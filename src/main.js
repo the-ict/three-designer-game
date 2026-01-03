@@ -19,13 +19,6 @@ renderer.setPixelRatio(window.devicePixelRatio);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
-// Lighting
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-scene.add(ambientLight);
-
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-directionalLight.position.set(5, 5, 5);
-scene.add(directionalLight);
 
 // Draco Loader
 const dracoLoader = new DRACOLoader();
@@ -108,7 +101,6 @@ loader.load(
 
                     child.geometry.attributes.uv2 = child.geometry.attributes.uv;
                 }
-
 
                 else {
 
