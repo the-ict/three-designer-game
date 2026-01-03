@@ -30,7 +30,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
-const pointer_controls = new PointerLockControls(camera, document.body);
+const pointer_controls = new PointerLockControls(camera, renderer.domElement);
 
 
 // Draco Loader
@@ -154,13 +154,10 @@ function animate() {
     requestAnimationFrame(animate);
 
     if (pointer_controls.isLocked) {
-        // Agar foydalanuvchi yursa (W, A, S, D bosilsa)
-        timer += walkingSpeed;
-
-        // Kamerani sinus to'lqini bo'ylab tebratish
-        camera.position.y = 1.6 + Math.sin(timer) * bobbingAmount;
-        // 1.6 - bu inson ko'zining o'rtacha balandligi (metrda)
-    }
+        console.log("isLocked: ", pointer_controls.isLocked);
+    } else {
+        console.log("isLocked: ", pointer_controls.isLocked);
+    };
 
     controls.update();
     renderer.render(scene, camera);
