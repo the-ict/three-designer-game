@@ -134,13 +134,14 @@ loader.load(
     }
 );
 
-camera.position.z = 5;
+camera.position.z = 1;
 camera.position.y = 2;
 
 function animate() {
     requestAnimationFrame(animate);
     controls.update();
     renderer.render(scene, camera);
+    console.log(camera);
 }
 
 animate();
