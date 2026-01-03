@@ -93,7 +93,6 @@ loader.load(
         model.traverse((child) => {
             if (child.isMesh) {
                 if (child.name.includes("eshik")) {
-                    console.log("door child: ", child);
                     child.material = new THREE.MeshStandardMaterial({
                         map: door_light_txt,
                         roughnessMap: door_roughness_txt,
@@ -110,8 +109,6 @@ loader.load(
                 }
 
                 else {
-
-                    console.log("eshik child: ", child);
                     child.material = new THREE.MeshStandardMaterial({
                         map: floor_light_txt,
                         roughnessMap: floor_roughness_txt,
