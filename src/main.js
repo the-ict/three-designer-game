@@ -9,12 +9,6 @@ window.addEventListener('click', () => {
     pointer_controls.lock();
 });
 
-
-let timer = 0;
-const walkingSpeed = 0.15;
-const bobbingAmount = 0.05;
-
-
 // Scene configurations
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
