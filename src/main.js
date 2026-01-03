@@ -42,22 +42,42 @@ const floor_light_txt = textureLoader.load("public/models/web_format_textures/Sa
 const floor_normal_txt = textureLoader.load("public/models/web_format_textures/Saxna_yer_Normal.1001.webp");
 
 const textures = [
-    floor_light_txt,
-    door_light_txt,
-    door_roughness_txt,
-    door_normal_txt,
-    floor_normal_txt,
-    floor_roughness_txt
+    {
+        texture: floor_roughness_txt,
+        isColorSpace: false,
+    },
+    {
+        texture: floor_light_txt,
+        isColorSpace: true,
+    },
+    {
+        texture: floor_normal_txt,
+        isColorSpace: false,
+    },
+    {
+        texture: door_roughness_txt,
+        isColorSpace: false,
+    },
+    {
+        texture: door_light_txt,
+        isColorSpace: true,
+    },
+    {
+        texture: door_normal_txt,
+        isColorSpace: false,
+    }
 ];
 
-for (let i = 0; i <= textures.length; i++) {
-    textures[i].flipY = false;
-    textures[i].encoding = THREE.sRGBEncoding;
-    textures[i].colorSpace = THREE.SRGBColorSpace;
+
+for (let i = 0; i < textures.length; i++) {
+    if (textures[i].isColorSpace) {
+        textures[i].texture.colorSpace = THREE.SRGBColorSpace;
+    } else {
+        textures[i].texture.colorSpace = THREE.NoColorSpace;
+    }
+
+    textures[i].texture.flipY = false;
 };
-
-
-
 
 
 // GLTF Loader
