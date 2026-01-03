@@ -8,6 +8,8 @@ import * as THREE from 'three';
 window.addEventListener('click', () => {
     pointer_controls.lock();
 });
+
+
 let timer = 0;
 const walkingSpeed = 0.15;
 const bobbingAmount = 0.05;
