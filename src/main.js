@@ -3,6 +3,8 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as THREE from 'three';
 
+
+// Scene configurations
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({
@@ -29,6 +31,35 @@ scene.add(directionalLight);
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.7/');
 
+
+// Texture loading
+const textureLoader = new THREE.TextureLoader();
+const floor_roughness_txt = textureLoader.load("public/models/web_format_textures/Saxna_yer_roughness_metallic_AO.1001.webp");
+const door_roughness_txt = textureLoader.load("/models/web_format_textures/Saxna_eshiklar_Roughness.1001.webp");
+const door_light_txt = textureLoader.load('/models/web_format_textures/Saxna_eshiklar_light.1001.webp');
+const door_normal_txt = textureLoader.load("/models/web_format_textures/Saxna_eshiklar_Normal.1001.webp");
+const floor_light_txt = textureLoader.load("public/models/web_format_textures/Saxna_yer_light.1001.webp");
+const floor_normal_txt = textureLoader.load("public/models/web_format_textures/Saxna_yer_Normal.1001.webp");
+
+const textures = [
+    floor_light_txt,
+    door_light_txt,
+    door_roughness_txt,
+    door_normal_txt,
+    floor_normal_txt,
+    floor_roughness_txt
+];
+
+for (let i = 0; i <= textures.length; i++) {
+    textures[i].flipY = false;
+    textures[i].encoding = THREE.sRGBEncoding;
+    textures[i].colorSpace = THREE.SRGBColorSpace;
+};
+
+
+
+
+
 // GLTF Loader
 const loader = new GLTFLoader();
 loader.setDRACOLoader(dracoLoader);
@@ -46,12 +77,6 @@ loader.load(
         console.error('An error happened', error);
     }
 );
-
-// Texture loading
-const textureLoader = new THREE.TextureLoader();
-const texture = textureLoader.load('/models/web_format_textures/Saxna_eshiklar_light.1001.webp');
-
-
 
 camera.position.z = 5;
 camera.position.y = 2;
