@@ -1,7 +1,16 @@
+import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as THREE from 'three';
+
+// Ekranga bosganda kamerani "qulflash"
+window.addEventListener('click', () => {
+    pointer_controls.lock();
+});
+let timer = 0;
+const walkingSpeed = 0.15;
+const bobbingAmount = 0.05;
 
 
 // Scene configurations
@@ -15,9 +24,11 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 
-// Orbit Controls 
+// Controls 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
+
+const pointer_controls = new PointerLockControls(camera, document.body);
 
 
 // Draco Loader
@@ -139,9 +150,18 @@ camera.position.y = 2;
 
 function animate() {
     requestAnimationFrame(animate);
+
+    if (pointer_controls.isLocked) {
+        // Agar foydalanuvchi yursa (W, A, S, D bosilsa)
+        timer += walkingSpeed;
+
+        // Kamerani sinus to'lqini bo'ylab tebratish
+        camera.position.y = 1.6 + Math.sin(timer) * bobbingAmount;
+        // 1.6 - bu inson ko'zining o'rtacha balandligi (metrda)
+    }
+
     controls.update();
     renderer.render(scene, camera);
-    console.log(camera);
 }
 
 animate();
