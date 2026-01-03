@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -46,6 +46,12 @@ loader.load(
         console.error('An error happened', error);
     }
 );
+
+// Texture loading
+const textureLoader = new THREE.TextureLoader();
+const texture = textureLoader.load('/models/web_format_textures/Saxna_eshiklar_light.1001.webp');
+
+
 
 camera.position.z = 5;
 camera.position.y = 2;
