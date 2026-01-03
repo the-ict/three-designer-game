@@ -88,7 +88,6 @@ loader.load(
     '/models/Saxna.glb',
     (gltf) => {
         const model = gltf.scene;
-        console.log(model);
 
         model.traverse((child) => {
             if (child.isMesh) {
