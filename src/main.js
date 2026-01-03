@@ -147,12 +147,6 @@ camera.position.y = 2;
 function animate() {
     requestAnimationFrame(animate);
 
-    if (pointer_controls.isLocked) {
-        console.log("isLocked: ", pointer_controls.isLocked);
-    } else {
-        console.log("isLocked: ", pointer_controls.isLocked);
-    };
-
     controls.update();
     renderer.render(scene, camera);
 }
