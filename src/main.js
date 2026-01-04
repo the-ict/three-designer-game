@@ -1,7 +1,15 @@
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { CharacterController } from './character-controller';
+import {
+    OrbitControls
+} from 'three/addons/controls/OrbitControls.js';
+import {
+    DRACOLoader
+} from 'three/addons/loaders/DRACOLoader.js';
+import {
+    GLTFLoader
+} from 'three/addons/loaders/GLTFLoader.js';
+import {
+    CharacterController
+} from './character-controller';
 import * as THREE from 'three';
 
 const scene = new THREE.Scene();
@@ -124,15 +132,11 @@ loader.load(
 );
 
 
-
-
+camera.position.z = 1;
+camera.position.y = 2;
 
 const controller = new CharacterController(camera, renderer.domElement, scene);
 controller.information();
-
-
-camera.position.z = 1;
-camera.position.y = 2;
 
 function animate() {
     controls.update();

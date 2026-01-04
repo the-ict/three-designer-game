@@ -15,8 +15,12 @@ class CharacterController {
         const x = event.clientX;
         const y = event.clientY;
 
-        this.camera.rotation._x = x;
-        this.camera.rotation._y = y;
+        if (!this.camera) {
+            console.log("Camera is not working !");
+            return;
+        } else {
+            console.log("Camera is now working fine!", this.camera);
+        };
     }
 
     update() {
