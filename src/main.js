@@ -4,7 +4,7 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as THREE from 'three';
 
-// Ekranga bosganda kamerani "qulflash"
+// Block when click on screen
 window.addEventListener('click', () => {
     pointer_controls.lock();
 });
