@@ -1,46 +1,107 @@
 import * as THREE from 'three';
+import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
 
 class CharacterController {
     constructor(camera, canvas, scene) {
         this.camera = camera;
         this.canvas = canvas;
         this.scene = scene;
+
+        this.controls = new PointerLockControls(camera, document.body);
+
+        this.moveForward = false;
+        this.moveBackward = false;
+        this.moveLeft = false;
+        this.moveRight = false;
+
+        this.velocity = new THREE.Vector3();
+        this.direction = new THREE.Vector3();
+
+        this.init();
     }
 
-    information() {
-        console.log("scene: ", this.scene);
-        console.log("canvas: ", this.canvas);
-        console.log("camera: ", this.camera);
+    init() {
+        this.canvas.addEventListener('click', () => {
+            this.controls.lock();
+        });
+
+        const onKeyDown = (event) => {
+            switch (event.code) {
+                case 'ArrowUp':
+                case 'KeyW':
+                    this.moveForward = true;
+                    break;
+                case 'ArrowLeft':
+                case 'KeyA':
+                    this.moveLeft = true;
+                    break;
+                case 'ArrowDown':
+                case 'KeyS':
+                    this.moveBackward = true;
+                    break;
+                case 'ArrowRight':
+                case 'KeyD':
+                    this.moveRight = true;
+                    break;
+            }
+        };
+
+        const onKeyUp = (event) => {
+            switch (event.code) {
+                case 'ArrowUp':
+                case 'KeyW':
+                    this.moveForward = false;
+                    break;
+                case 'ArrowLeft':
+                case 'KeyA':
+                    this.moveLeft = false;
+                    break;
+                case 'ArrowDown':
+                case 'KeyS':
+                    this.moveBackward = false;
+                    break;
+                case 'ArrowRight':
+                case 'KeyD':
+                    this.moveRight = false;
+                    break;
+            }
+        };
+
+        document.addEventListener('keydown', onKeyDown);
+        document.addEventListener('keyup', onKeyUp);
     }
 
     capsule() {
-        const geometry = new THREE.CapsuleGeometry(0.1, 0.2, 2, 10, 1);
-
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-
-        const capsule = new THREE.Mesh(geometry, material);
-
-        capsule.position.set(0, 0, 0);
-
-        this.scene.add(capsule);
-    }
-
-    mouseMove(event) {
-        const x = event.clientX;
-        const y = event.clientY;
-
-        if (!this.camera) {
-            return;
-        } else {
-        };
+        const geometry = new THREE.CapsuleGeometry(0.5, 1, 4, 8);
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
+        this.capsuleMesh = new THREE.Mesh(geometry, material);
+        this.scene.add(this.capsuleMesh);
     }
 
     update() {
+        if (this.controls.isLocked === true) {
+            const delta = 0.015;
+            const speed = 10.0;
 
+            this.velocity.x -= this.velocity.x * 10.0 * delta;
+            this.velocity.z -= this.velocity.z * 10.0 * delta;
+
+            this.direction.z = Number(this.moveForward) - Number(this.moveBackward);
+            this.direction.x = Number(this.moveRight) - Number(this.moveLeft);
+            this.direction.normalize();
+
+            if (this.moveForward || this.moveBackward) this.velocity.z -= this.direction.z * speed * delta;
+            if (this.moveLeft || this.moveRight) this.velocity.x -= this.direction.x * speed * delta;
+
+            this.controls.moveRight(-this.velocity.x * delta);
+            this.controls.moveForward(-this.velocity.z * delta);
+
+            if (this.capsuleMesh) {
+                this.capsuleMesh.position.copy(this.camera.position);
+                this.capsuleMesh.position.y -= 1;
+            }
+        }
     }
 }
 
-
-export {
-    CharacterController
-};
+export { CharacterController };

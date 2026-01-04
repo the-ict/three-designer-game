@@ -1,6 +1,4 @@
-import {
-    OrbitControls
-} from 'three/addons/controls/OrbitControls.js';
+
 import {
     DRACOLoader
 } from 'three/addons/loaders/DRACOLoader.js';
@@ -22,8 +20,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
+
 
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.7/');
@@ -133,14 +130,17 @@ loader.load(
 
 
 camera.position.z = 1;
-camera.position.y = 2;
+camera.position.y = 1;
+camera.position.x = 1;
 
 const controller = new CharacterController(camera, renderer.domElement, scene);
 controller.capsule();
 
 function animate() {
-    controls.update();
+
+    controller.update();
     renderer.render(scene, camera);
+    camera.updateProjectionMatrix();
 
     requestAnimationFrame(animate);
 }
@@ -151,10 +151,4 @@ window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
-});
-
-window.addEventListener("mousemove", controller.mouseMove);
-
-window.addEventListener("keydown", (event) => {
-    console.log("keydown event: ", event);
 });
