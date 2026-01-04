@@ -14,11 +14,13 @@ class CharacterController {
     }
 
     capsule() {
-        const geometry = new THREE.CapsuleGeometry(5, 24.041, 10, 20, 1);
+        const geometry = new THREE.CapsuleGeometry(0.1, 0.2, 2, 10, 1);
 
         const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 
         const capsule = new THREE.Mesh(geometry, material);
+
+        capsule.position.set(0, 0, 0);
 
         this.scene.add(capsule);
     }
