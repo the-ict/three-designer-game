@@ -136,7 +136,7 @@ camera.position.z = 1;
 camera.position.y = 2;
 
 const controller = new CharacterController(camera, renderer.domElement, scene);
-controller.information();
+controller.capsule();
 
 function animate() {
     controls.update();

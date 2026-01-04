@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 class CharacterController {
     constructor(camera, canvas, scene) {
         this.camera = camera;
@@ -11,15 +13,23 @@ class CharacterController {
         console.log("camera: ", this.camera);
     }
 
+    capsule() {
+        const geometry = new THREE.CapsuleGeometry(5, 24.041, 10, 20, 1);
+
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+
+        const capsule = new THREE.Mesh(geometry, material);
+
+        this.scene.add(capsule);
+    }
+
     mouseMove(event) {
         const x = event.clientX;
         const y = event.clientY;
 
         if (!this.camera) {
-            console.log("Camera is not working !");
             return;
         } else {
-            console.log("Camera is now working fine!", this.camera);
         };
     }
 
@@ -29,4 +39,6 @@ class CharacterController {
 }
 
 
-export { CharacterController };
+export {
+    CharacterController
+};
