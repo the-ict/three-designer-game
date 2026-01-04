@@ -72,10 +72,7 @@ class CharacterController {
     }
 
     capsule() {
-        const geometry = new THREE.CapsuleGeometry(0.5, 1, 4, 8);
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
-        this.capsuleMesh = new THREE.Mesh(geometry, material);
-        this.scene.add(this.capsuleMesh);
+
     }
 
     update() {
@@ -83,8 +80,8 @@ class CharacterController {
             const delta = 0.015;
             const speed = 10.0;
 
-            this.velocity.x -= this.velocity.x * 10.0 * delta;
-            this.velocity.z -= this.velocity.z * 10.0 * delta;
+            this.velocity.x -= this.velocity.x * speed * delta;
+            this.velocity.z -= this.velocity.z * speed * delta;
 
             this.direction.z = Number(this.moveForward) - Number(this.moveBackward);
             this.direction.x = Number(this.moveRight) - Number(this.moveLeft);
@@ -95,11 +92,6 @@ class CharacterController {
 
             this.controls.moveRight(-this.velocity.x * delta);
             this.controls.moveForward(-this.velocity.z * delta);
-
-            if (this.capsuleMesh) {
-                this.capsuleMesh.position.copy(this.camera.position);
-                this.capsuleMesh.position.y -= 1;
-            }
         }
     }
 }

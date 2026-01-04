@@ -130,7 +130,7 @@ loader.load(
 
 
 camera.position.z = 1;
-camera.position.y = 1;
+camera.position.y = 0.5;
 camera.position.x = 1;
 
 const controller = new CharacterController(camera, renderer.domElement, scene);
